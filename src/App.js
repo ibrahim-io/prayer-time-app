@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const App = () => {
   const [now, setNow] = useState(new Date())
   const regex = /..:..:../
-  const time = regex.exec(now.toISOString())[0]
+  const time = now.toLocaleString().split(",")
   const prayers = [
     {
       name: "Fajr",
@@ -37,8 +37,13 @@ const App = () => {
 
   return (
     <>
-      <h1>Prayer Times</h1>
-      <div className="curr_time_box"> {time} </div>
+      <div className="header">
+        <h1>Prayer Times</h1>
+      </div>
+      <div className="curr_time_box"> 
+        <div className="curr_time">{time[1]}</div> 
+        <div className="date">{time[0]}</div>
+      </div>
       {prayers.map(p => {
         return (<div className="prayer_box" key={p.name}>{p.name} : {p.time}</div>)
       })}

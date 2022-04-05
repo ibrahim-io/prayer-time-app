@@ -10,11 +10,22 @@ body {
 
 h1 {
   text-align: center;
+  color: white;
+}
+
+h2 {
   color: white
 }
 
-.curr_time_box {
+.date {
+  font-size: 1em;
+}
+
+.curr_time {
   font-size: 4em;
+}
+
+.curr_time_box {
   background-color: white;
   text-align: center;
   color: burlywood;
