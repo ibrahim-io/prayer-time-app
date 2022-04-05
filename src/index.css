@@ -1,13 +1,34 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+   'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: burlywood;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1 {
+  text-align: center;
+  color: white
+}
+
+.curr_time_box {
+  font-size: 4em;
+  background-color: white;
+  text-align: center;
+  color: burlywood;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  margin: 0 2em  5px 2em;
+}
+
+.prayer_box {
+  font-size: 1.5em;
+  background-color: white; 
+  text-align: center;
+  margin: 5px 4em 5px 4em;
+  color: burlywood;
+  padding-top:1em;
+  padding-bottom:1em;
 }
