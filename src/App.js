@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 const App = () => {
   const [now, setNow] = useState(new Date())
-  const regex = /..:..:../
   const time = now.toLocaleString().split(",")
   const prayers = [
     {
