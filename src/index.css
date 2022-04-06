@@ -31,15 +31,29 @@ h2 {
   color: burlywood;
   padding-top: 2em;
   padding-bottom: 2em;
-  margin: 0 2em  5px 2em;
+  margin: 0em 2em  5px 2em;
 }
 
 .prayer_box {
-  font-size: 1.5em;
   background-color: white; 
   text-align: center;
-  margin: 5px 4em 5px 4em;
+  margin: 0.5em 3em 0.5em 3em;
   color: burlywood;
-  padding-top:1em;
-  padding-bottom:1em;
+  padding:0 3.5em 0 3.5em;
+  flex: 3;
+}
+
+h3 {
+  font-size: 2em;
+}
+
+p {
+  font-size: 1em;
+}
+
+.prayer_container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  align-content: space-around;
 }
