@@ -37,7 +37,7 @@ const App = () => {
   const date_lookup = `${year}-${month}-${day}`
   setInterval(() => setNow(new Date()), 60000)
   useEffect(() => {
-    axios.get(`https://www.londonprayertimes.com/api/times/?format=json&key=${process.env.REACT_APP_API_KEY}&year=2022&month=${currMonth}&24hours=true`).then(res => {
+    axios.get(`https://www.londonprayertimes.com/api/times/?format=json&key=9fa65efc-3a14-4636-af03-98a7b51c401f&year=2022&month=${currMonth}&24hours=true`).then(res => {
       setMonthTimes(res.data.times)
     })
   },[month])
