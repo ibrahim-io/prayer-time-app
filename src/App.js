@@ -1,15 +1,8 @@
 import { useEffect, useState } from "react";
-import * as data from './April_Prayer_Times.json'
+import axios from 'axios'
+import PrayerBox from "./components/PrayerBox";
 
-const PrayerBox = ({name, time}) => {
-  return (
-    <div className="prayer_box">
-      <h3>{name}</h3>
-      <h4>Adhan : {time}</h4>
-      <p>Iqamah: 15 mins after</p>
-    </div>
-  )
-}
+
 
 const Fajr = ({time}) => {
   return <PrayerBox name="Fajr" time={time} />
@@ -38,35 +31,40 @@ const Isha = ({time}) => {
 const App = () => {
   const [now, setNow] = useState(new Date())
   const time = now.toLocaleString().split(",")
-  const regex = /../.exec(time[0])[0]
-  const day_of_month = regex[0] === '0' ? regex[1] : regex
-  const day_data = data[parseInt(day_of_month)-1]
-
+  const currMonth = now.toLocaleString('default', {month: 'long'}).toLowerCase()
+  const [day,month,year] = time[0].split("/")
+  const [monthTimes, setMonthTimes] = useState({})
+  const date_lookup = `${year}-${month}-${day}`
+  setInterval(() => setNow(new Date()), 60000)
   useEffect(() => {
-    setInterval(() => setNow(new Date()), 1000)
-  }, [])
-
-  return (
-    <>
-      <div className="header">
-        <h1>Prayer Times</h1>
-      </div>
-      <div className="curr_time_box"> 
-        <div className="curr_time">{time[1]}</div> 
-        <div className="date">{time[0]}</div>
-      </div>
-      <div className="prayer_container">
-        <Fajr time={day_data["Fajr"]}/>
-        <Sunrise time={day_data["Sunrise"]}/>
-        <Dhuhr time={day_data["Dhuhr"]}/>
-      </div>
-      <div className="prayer_container">
-        <Asr time={day_data["Asr"]}/>
-        <Maghrib time={day_data["Maghrib"]}/>
-        <Isha time={day_data["Isha"]}/>
-      </div>
-    </> 
-  )
+    axios.get(`https://www.londonprayertimes.com/api/times/?format=json&key=${process.env.REACT_APP_API_KEY}&year=2022&month=${currMonth}&24hours=true`).then(res => {
+      setMonthTimes(res.data.times)
+    })
+  },[month])
+  if(Object.keys(monthTimes).length !== 0) {
+    return (
+      <>
+        <div className="header">
+          <h1>Prayer Times</h1>
+        </div>
+        <div className="curr_time_box"> 
+          <div className="curr_time">{time[1].match(/..:../)}</div> 
+          <div className="date">{time[0]}</div>
+        </div>
+        <div className="prayer_container">
+          <Fajr time={monthTimes[date_lookup]["fajr"]}/>
+          <Sunrise time={monthTimes[date_lookup]["sunrise"]}/>
+          <Dhuhr time={monthTimes[date_lookup]["dhuhr"]}/>
+        </div>
+        <div className="prayer_container">
+          <Asr time={monthTimes[date_lookup]["asr"]}/>
+          <Maghrib time={monthTimes[date_lookup]["maghrib"]}/>
+          <Isha time={monthTimes[date_lookup]["isha"]}/>
+        </div>
+      </> 
+    )
+  }
+  
 }
 
 export default App;
