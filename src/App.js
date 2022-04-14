@@ -42,7 +42,7 @@ const App = () => {
           <PrayerBox name="Maghrib" adhan_time={prayers['magrib']} iqamah_time={prayers['magrib_jamat']}/>
           <PrayerBox name="Isha" adhan_time={prayers['isha']} iqamah_time={prayers['isha_jamat']}/>
         </div>
-        <p>Times are based on London Central Mosque</p>
+        <p className="footer">Times are based on London Central Mosque</p>
       </> 
     )
   }
