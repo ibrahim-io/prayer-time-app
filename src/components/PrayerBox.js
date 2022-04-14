@@ -1,11 +1,11 @@
 import React from "react"
 
-const PrayerBox = ({name, time}) => {
+const PrayerBox = ({name, adhan_time, iqamah_time}) => {
   return (
     <div className="prayer_box">
       <h3>{name}</h3>
-      <h4>Adhan : {time}</h4>
-      <p>Iqamah: 15 mins after</p>
+      <h4>Adhan : {adhan_time}</h4>
+      <p>Iqamah: {iqamah_time}</p>
     </div>
   )
 }

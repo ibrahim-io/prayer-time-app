@@ -2,11 +2,6 @@ import { useEffect, useState } from "react";
 import axios from 'axios'
 import PrayerBox from "./components/PrayerBox";
 
-
-
-const Fajr = ({time}) => {
-  return <PrayerBox name="Fajr" time={time} />
-}
 const Sunrise = ({time}) => {
   return (
     <div className="prayer_box">
@@ -14,27 +9,13 @@ const Sunrise = ({time}) => {
     </div>
   )
 }
-const Dhuhr = ({time}) => {
-  return <PrayerBox name="Dhuhr" time={time} />
-}
-const Asr = ({time}) => {
-  return <PrayerBox name="Asr" time={time} />
-}
-const Maghrib = ({time}) => {
-  return <PrayerBox name="Maghrib" time={time} />
-}
-const Isha = ({time}) => {
-  return <PrayerBox name="Isha" time={time} />
-}
-
-
 const App = () => {
   const [now, setNow] = useState(new Date())
   const time = now.toLocaleString().split(",")
   const currMonth = now.toLocaleString('default', {month: 'long'}).toLowerCase()
   const [day,month,year] = time[0].split("/")
   const [monthTimes, setMonthTimes] = useState({})
-  const date_lookup = `${year}-${month}-${day}`
+  const prayers = monthTimes[`${year}-${month}-${day}`]
   setInterval(() => setNow(new Date()), 60000)
   useEffect(() => {
     axios.get(`https://www.londonprayertimes.com/api/times/?format=json&key=9fa65efc-3a14-4636-af03-98a7b51c401f&year=2022&month=${currMonth}&24hours=true`).then(res => {
@@ -52,15 +33,16 @@ const App = () => {
           <div className="date">{time[0]}</div>
         </div>
         <div className="prayer_container">
-          <Fajr time={monthTimes[date_lookup]["fajr"]}/>
-          <Sunrise time={monthTimes[date_lookup]["sunrise"]}/>
-          <Dhuhr time={monthTimes[date_lookup]["dhuhr"]}/>
+          <PrayerBox name="Fajr" adhan_time={prayers['fajr']} iqamah_time={prayers['fajr_jamat']}/>
+          <Sunrise time={prayers["sunrise"]}/>
+          <PrayerBox name="Dhuhr" adhan_time={prayers['dhuhr']} iqamah_time={prayers['dhuhr_jamat']}/>
         </div>
         <div className="prayer_container">
-          <Asr time={monthTimes[date_lookup]["asr"]}/>
-          <Maghrib time={monthTimes[date_lookup]["maghrib"]}/>
-          <Isha time={monthTimes[date_lookup]["isha"]}/>
+          <PrayerBox name="Asr" adhan_time={prayers['asr']} iqamah_time={prayers['asr_jamat']}/>
+          <PrayerBox name="Maghrib" adhan_time={prayers['magrib']} iqamah_time={prayers['magrib_jamat']}/>
+          <PrayerBox name="Isha" adhan_time={prayers['isha']} iqamah_time={prayers['isha_jamat']}/>
         </div>
+        <p>Times are based on London Central Mosque</p>
       </> 
     )
   }
