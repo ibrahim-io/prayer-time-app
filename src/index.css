@@ -5,12 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: burlywood;
 }
 
 h1 {
   text-align: center;
   color: white;
+  margin-top: 0;
+  padding-top: 2vh;
 }
 
 h2 {
@@ -61,4 +62,22 @@ p {
   flex-wrap: wrap;
   align-items: stretch;
   align-content: space-around;
+}
+
+.outerScreen {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+}
+
+.leftScreen {
+  float: left;
+  width: 50vw;
+  background-color: burlywood;
+  height: 100vh;
+}
+
+.rightScreen {
+  background-color: red;  
 }
