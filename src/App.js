@@ -13,7 +13,8 @@ const App = () => {
   const [now, setNow] = useState(new Date())
   const time = now.toLocaleString().split(",")
   const currMonth = now.toLocaleString('default', {month: 'long'}).toLowerCase()
-  const [day,month,year] = time[0].split("/")
+  const [month_,day,year] = time[0].split("/")
+  const month = month_.length === 1 ? '0' + month_ : month_
   const [monthTimes, setMonthTimes] = useState({})
   const prayers = monthTimes[`${year}-${month}-${day}`]
   setInterval(() => setNow(new Date()), 60000)
@@ -24,7 +25,7 @@ const App = () => {
   },[month])
   if(Object.keys(monthTimes).length !== 0) {
     return (
-      <>
+      <div>
         <div className="header">
           <h1>Prayer Times</h1>
         </div>
@@ -43,7 +44,7 @@ const App = () => {
           <PrayerBox name="Isha" adhan_time={prayers['isha']} iqamah_time={prayers['isha_jamat']}/>
         </div>
         <p className="footer">Times are based on London Central Mosque</p>
-      </> 
+      </div> 
     )
   }
   
