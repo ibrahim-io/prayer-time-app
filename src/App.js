@@ -17,12 +17,13 @@ const App = () => {
   const month = month_.length === 1 ? '0' + month_ : month_
   const [monthTimes, setMonthTimes] = useState({})
   const prayers = monthTimes[`${year}-${month}-${day}`]
-  setInterval(() => setNow(new Date()), 60000)
+  setInterval(() => setNow(new Date()), 1000)
   useEffect(() => {
     axios.get(`https://www.londonprayertimes.com/api/times/?format=json&key=9fa65efc-3a14-4636-af03-98a7b51c401f&year=2022&month=${currMonth}&24hours=true`).then(res => {
       setMonthTimes(res.data.times)
     })
   },[month])
+
   if(Object.keys(monthTimes).length !== 0) {
     return (
       <div>
@@ -30,7 +31,7 @@ const App = () => {
           <h1>Prayer Times</h1>
         </div>
         <div className="curr_time_box"> 
-          <div className="curr_time">{time[1].match(/..:../)}</div> 
+          <div className="curr_time">{time[1].match(/..:..:../)}</div> 
           <div className="date">{time[0]}</div>
         </div>
         <div className="prayer_container">
