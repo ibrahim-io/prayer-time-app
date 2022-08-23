@@ -34,6 +34,7 @@ h2 {
 
 .prayer_box {
   background-color: white; 
+  display: flex;
   text-align: center;
   color: burlywood;
 }
@@ -45,6 +46,7 @@ h2 {
 
 .prayer_container {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   align-items: stretch;
   align-content: space-around;
