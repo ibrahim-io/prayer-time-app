@@ -11,10 +11,9 @@ const Sunrise = ({time}) => {
 }
 const App = () => {
   const [now, setNow] = useState(new Date())
-  const time = now.toLocaleString().split(",")
+  const time = now.toISOString().split("T")
   const currMonth = now.toLocaleString('default', {month: 'long'}).toLowerCase()
-  const [month_,day,year] = time[0].split("/")
-  const month = month_.length === 1 ? '0' + month_ : month_
+  const [year,month,day] = time[0].split("-")
   const [monthTimes, setMonthTimes] = useState({})
   const prayers = monthTimes[`${year}-${month}-${day}`]
   setInterval(() => setNow(new Date()), 1000)
@@ -23,7 +22,6 @@ const App = () => {
       setMonthTimes(res.data.times)
     })
   },[month])
-
   if(Object.keys(monthTimes).length !== 0) {
     return (
       <div className="outerScreen">
@@ -39,8 +37,6 @@ const App = () => {
             <PrayerBox name="Fajr" adhan_time={prayers['fajr']} iqamah_time={prayers['fajr_jamat']}/>
             <Sunrise time={prayers["sunrise"]}/>
             <PrayerBox name="Dhuhr" adhan_time={prayers['dhuhr']} iqamah_time={prayers['dhuhr_jamat']}/>
-          </div>
-          <div className="prayer_container">
             <PrayerBox name="Asr" adhan_time={prayers['asr']} iqamah_time={prayers['asr_jamat']}/>
             <PrayerBox name="Maghrib" adhan_time={prayers['magrib']} iqamah_time={prayers['magrib_jamat']}/>
             <PrayerBox name="Isha" adhan_time={prayers['isha']} iqamah_time={prayers['isha_jamat']}/>
