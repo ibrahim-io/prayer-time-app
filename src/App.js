@@ -6,9 +6,12 @@ import RightScreen from "./components/RightScreen";
 
 const App = () => {
   const [now, setNow] = useState(new Date())
-  const time = now.toISOString().split("T")
+  const time = now.toLocaleString('en-GB', {timeZone: 'Europe/London'}).split(', ');
+  
+  const day = now.getDate();
+  const month = ("0" + (now.getMonth() + 1)).slice(-2);
+  const year = now.getFullYear();
   const currMonth = now.toLocaleString('default', {month: 'long'}).toLowerCase()
-  const [year,month,day] = time[0].split("-")
   const [monthTimes, setMonthTimes] = useState({})
   const prayers = monthTimes[`${year}-${month}-${day}`]
   setInterval(() => setNow(new Date()), 1000)
