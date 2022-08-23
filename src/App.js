@@ -1,34 +1,54 @@
 import { useEffect, useState } from "react";
-import axios from 'axios'
+
+import { useAsync } from "./hooks/useAsync";
+
 import LeftScreen from "./components/LeftScreen";
 import RightScreen from "./components/RightScreen";
 
-
 const App = () => {
-  const [now, setNow] = useState(new Date())
-  const time = now.toLocaleString('en-GB', {timeZone: 'Europe/London'}).split(', ');
-  
+  const [now, setNow] = useState(new Date());
+  useEffect(() => {
+    const timeIntervalId = setInterval(() => setNow(new Date()), 1000);
+    // cleanup function
+    return () => {
+      clearInterval(timeIntervalId);
+    };
+  }, []);
+
   const day = now.getDate();
   const month = ("0" + (now.getMonth() + 1)).slice(-2);
   const year = now.getFullYear();
-  const currMonth = now.toLocaleString('default', {month: 'long'}).toLowerCase()
-  const [monthTimes, setMonthTimes] = useState({})
-  const prayers = monthTimes[`${year}-${month}-${day}`]
-  setInterval(() => setNow(new Date()), 1000)
+
+  const { execute, status, value: monthTimes, error } = useAsync(async () => {
+    console.log("Requesting londonprayertimes");
+    const res = await fetch(`https://www.londonprayertimes.com/api/times/?format=json&key=9fa65efc-3a14-4636-af03-98a7b51c401f&year=${year}&month=${month}&24hours=true`);
+    if (res.ok) {
+      return (await res.json()).times;
+    }
+    throw new Error(`Request returned with HTTP status code: ${res.status}`);
+  }, false);
   useEffect(() => {
-    axios.get(`https://www.londonprayertimes.com/api/times/?format=json&key=9fa65efc-3a14-4636-af03-98a7b51c401f&year=2022&month=${currMonth}&24hours=true`).then(res => {
-      setMonthTimes(res.data.times)
-    })
-  },[month])
-  if(Object.keys(monthTimes).length !== 0) {
+    execute();
+  }, [month]);
+  
+  if (status === "error") {
+    return <div className="errorBar">{ error.message }</div>;
+  }
+
+  if (status === "pending") {
+    return <div className="loader"></div>;
+  }
+
+  if (status === "success") {
     return (
       <div className="outerScreen">
-        <LeftScreen time={time} prayers={prayers} />
+        <LeftScreen now={now} prayers={monthTimes[`${year}-${month}-${day}`]} />
         <RightScreen />
       </div>
-    )
+    );
   }
-  
-}
+
+  return <div>Unkown State { status }</div>
+};
 
 export default App;

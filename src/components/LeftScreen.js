@@ -1,7 +1,8 @@
 import PrayerBox from "./PrayerBox"
 import Sunrise from "./Sunrise"
 
-const LeftScreen = ({time, prayers}) => {
+const LeftScreen = ({ now, prayers }) => {
+  const time = now.toLocaleString("en-GB", { timeZone: "Europe/London" }).split(", ");
 
   return (
     <div className="leftScreen">
@@ -9,8 +10,8 @@ const LeftScreen = ({time, prayers}) => {
         <h1>Prayer Times</h1>
       </div>
       <div className="curr_time_box"> 
-        <div className="curr_time">{time[1].match(/..:..:../)}</div> 
-        <div className="date">{time[0]}</div>
+        <div className="curr_time">{ time[1] }</div> 
+        <div className="date">{ time[0] }</div>
       </div>
       <div className="prayer_container">
         <PrayerBox name="Fajr" adhan_time={prayers['fajr']} iqamah_time={prayers['fajr_jamat']}/>
@@ -22,8 +23,7 @@ const LeftScreen = ({time, prayers}) => {
       </div>
       <p className="footer">Times are based on London Central Mosque</p>
     </div> 
-  )
-
+  );
 }
 
 export default LeftScreen
