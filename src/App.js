@@ -21,7 +21,7 @@ const App = () => {
 
   const { execute, status, value: monthTimes, error } = useAsync(async () => {
     console.log("Requesting londonprayertimes");
-    const res = await fetch(`https://www.londonprayertimes.com/api/times/?format=json&key=9fa65efc-3a14-4636-af03-98a7b51c401f&year=${year}&month=${month}&24hours=true`);
+    const res = await fetch(`https://www.londonprayertimes.com/api/times/?format=json&key=${process.env.REACT_APP_API_KEY}&year=${year}&month=${month}&24hours=true`);
     if (res.ok) {
       return (await res.json()).times;
     }
