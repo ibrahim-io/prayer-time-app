@@ -1,10 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,500;1,900&family=Space+Grotesk:wght@500&display=swap');
+@import url('https://db.onlinewebfonts.com/c/f0034555c887b9dbfb67c6fd228d8f33?family=KFGQPC+Uthman+Taha+Naskh');
+
+:root {
+  --main-bg-color: rgb(217, 181, 122);
+}
+
+
 body {
   margin: 0;
-  font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Roboto','Ubuntu', 'Verdana', 'Segoe UI',  'Oxygen',
    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 h1 {
@@ -29,14 +35,14 @@ h2 {
 .curr_time_box {
   background-color: white;
   text-align: center;
-  color: burlywood;
+  color: var(--main-bg-color);
 }
 
 .prayer_box {
   background-color: white; 
   display: flex;
   justify-content: space-between;
-  color: burlywood;
+  color: var(--main-bg-color);
 }
 
 .footer {
@@ -57,14 +63,46 @@ h2 {
 }
 
 .leftScreen {
-  float: left;
   width: 50vw;
-  background-color: burlywood;
+  background-color: var(--main-bg-color);
   height: 100vh;
 }
 
 .rightScreen {
-  background-color: red;  
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rightHeader {
+  font-size: 2em;
+  color: black;
+}
+
+.hadithContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.engHadith {
+  background-color: var(--main-bg-color);
+  width: 40vw;
+  height: 30vh;
+  margin-bottom: 5px;
+  font-size: 1.3em;
+  padding: 10px;
+  text-align: center;
+}
+
+.arabicHadith {
+  background-color: var(--main-bg-color);
+  width: 40vw;
+  height: 30vh;
+  font-family: 'KFGQPC Uthman Taha Naskh Regular';
+  text-align: right;
+  font-size: 2em;
+  padding: 10px;
 }
 
 .errorBar {
