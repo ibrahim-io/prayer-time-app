@@ -20,28 +20,31 @@ const App = () => {
 
   const arabicHadith = ['وعن ابن عمر رضي الله عنهما أن رسول الله صلى الله عليه وسلم مر على رجل من الأنصار وهو يعظ أخاه في الحياء، فقال رسول الله صلى الله عليه وسلم‏:‏ "دعه فإن الحياء من الإيمان" ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏',
                         'وعن عمران بن حصين، رضي الله عنهما، قال‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ “ الحياء لا يأتى إلا بخير” ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏',
-                        'وعن أبى هريرة رضي الله عنه، أن رسول الله صلى الله عليه وسلم قال‏:‏ “الإيمان بضع وسبعون، أو بضع وستون شعبة، فأفضلها قول لا إله إلا الله، وأدناها إماطة الأذى عن الطريق، والحياء شعبة من الإيمان” ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.'
+                        'وعن أبى هريرة رضي الله عنه، أن رسول الله صلى الله عليه وسلم قال‏:‏ “الإيمان بضع وسبعون، أو بضع وستون شعبة، فأفضلها قول لا إله إلا الله، وأدناها إماطة الأذى عن الطريق، والحياء شعبة من الإيمان” ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.',
                       ]
 
   const [counter, setCounter] = useState(0);
-  setInterval(() => {
-      if (counter >= 2) {
-        setCounter(0);
-      } else {
-        setCounter(counter+1);
-      }
-    }, 1000);
   const [now, setNow] = useState(new Date());
   useEffect(() => {
-    const timeIntervalId = setInterval(() => setNow(new Date()), 1000);
-    
+    const timeIntervalId = setInterval(() => {
+      setNow(new Date())
+    }, 1000);
+    const counterIntervalId = setInterval(() => {
+      if (counter < 2) {
+        setCounter(counter+1)
+      } else {
+        setCounter(0)
+      }
+    }, 15000);
+      
     // cleanup function
     return () => {
+      clearInterval(counterIntervalId)
       clearInterval(timeIntervalId);
     };
-  }, []);
+  }, [counter]);
 
-  const day = now.getDate();
+  const day = ("0" + now.getDate()).slice(-2);
   const month = ("0" + (now.getMonth() + 1)).slice(-2);
   const year = now.getFullYear();
 

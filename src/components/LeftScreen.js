@@ -3,7 +3,6 @@ import Sunrise from "./Sunrise"
 
 const LeftScreen = ({ now, prayers }) => {
   const time = now.toLocaleString("en-GB", { timeZone: "Europe/London" }).split(", ");
-
   return (
     <div className="leftScreen">
       <div className="header">
