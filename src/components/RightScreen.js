@@ -4,8 +4,14 @@ const RightScreen = ({engHadith, arabicHadith, counter}) => {
     <div className="rightScreen">
       <h1 className="rightHeader">Hadith & Announcements</h1>
       <div className="hadithContainer">
-        <div className="engHadith">{engHadith[counter]}</div>
-        <div className="arabicHadith">{arabicHadith[counter]}</div>
+        <div className="engHadith">
+          <p>{engHadith[counter].En_Sanad}</p>
+          <p>{engHadith[counter].En_Text}</p>
+        </div>
+        <div className="arabicHadith">
+          <p>{arabicHadith[counter].Ar_Sanad_1}</p>
+          <p>{arabicHadith[counter].Ar_Text}</p>
+        </div>
       </div>
     </div>
   )
