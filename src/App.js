@@ -19,7 +19,7 @@ const App = () => {
       } else {
         setCounter(0)
       }
-    }, 30000);
+    }, 45000);
       
     // cleanup function
     return () => {
@@ -62,7 +62,7 @@ const App = () => {
     return (
       <div className="outerScreen">
         <LeftScreen now={now} prayers={value[0][`${year}-${month}-${day}`]} />
-        <RightScreen arabicHadith={value[2]} engHadith={value[1]} counter={counter} />
+        <RightScreen arabicHadith={value[2]} engHadith={value[1]} counter={counter} setCounter={setCounter}/>
       </div>
     );
   }
