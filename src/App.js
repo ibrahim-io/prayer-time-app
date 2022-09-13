@@ -7,18 +7,14 @@ import RightScreen from "./components/RightScreen";
 
 const App = () => {
 
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(Math.floor(Math.random() * 1895));
   const [now, setNow] = useState(new Date());
   useEffect(() => {
     const timeIntervalId = setInterval(() => {
       setNow(new Date())
     }, 1000);
     const counterIntervalId = setInterval(() => {
-      if (counter < 1895) {
-        setCounter(counter+1)
-      } else {
-        setCounter(0)
-      }
+      setCounter(Math.floor(Math.random() * 1895))
     }, 45000);
       
     // cleanup function
