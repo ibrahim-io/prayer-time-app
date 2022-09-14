@@ -27,10 +27,6 @@ h2 {
   font-size: 1em;
 }
 
-.curr_time {
-  font-size: 4em;
-}
-
 .curr_time_box {
   margin-top: 5px;
   background-color: white;
@@ -42,8 +38,12 @@ h2 {
 }
 
 .countdown_timer {
-  font-size: 1.2em;
+  font-size: 4em;
   font-weight: bolder;
+}
+
+.countdown_text {
+  font-size: 1.1em;
 }
 
 .prayer_box {

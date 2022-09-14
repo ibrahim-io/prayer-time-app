@@ -6,7 +6,6 @@ import LeftScreen from "./components/LeftScreen";
 import RightScreen from "./components/RightScreen";
 
 const App = () => {
-
   const [counter, setCounter] = useState(Math.floor(Math.random() * 1895));
   const [now, setNow] = useState(new Date());
   useEffect(() => {
@@ -57,7 +56,7 @@ const App = () => {
   if (status === "success") {
     return (
       <div className="outerScreen">
-        <LeftScreen now={now} prayers={value[0][`${year}-${month}-${day}`]} />
+        <LeftScreen now={now} prayers={value[0][`${year}-${month}-${day}`] }/>
         <RightScreen arabicHadith={value[2]} engHadith={value[1]} counter={counter} setCounter={setCounter}/>
       </div>
     );
