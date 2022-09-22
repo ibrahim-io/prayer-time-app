@@ -60,12 +60,12 @@ const LeftScreen = ({ now, prayers}) => {
         <div className="countdown_text">HOURS: MINS: SECS</div>
       </div>
       <div className="prayer_container">
-        <PrayerBox name="Fajr" adhan_time={prayers['fajr']} iqamah_time={prayers['fajr_jamat']}/>
-        <PrayerBox name="Sunrise" adhan_time={prayers["sunrise"]} iqamah_time=" --:--"/>
-        <PrayerBox name="Dhuhr" adhan_time={prayers['dhuhr']} iqamah_time={prayers['dhuhr_jamat']}/>
-        <PrayerBox name="Asr" adhan_time={prayers['asr']} iqamah_time={prayers['asr_jamat']}/>
-        <PrayerBox name="Maghrib" adhan_time={prayers['magrib']} iqamah_time={prayers['magrib_jamat']}/>
-        <PrayerBox name="Isha" adhan_time={prayers['isha']} iqamah_time={prayers['isha_jamat']}/>
+        <PrayerBox nextPrayer={prayerNames[prayerNameCounter]} name="Fajr" adhan_time={prayers['fajr']} iqamah_time={prayers['fajr_jamat']}/>
+        <PrayerBox nextPrayer={prayerNames[prayerNameCounter]} name="Sunrise" adhan_time={prayers["sunrise"]} iqamah_time=" --:--"/>
+        <PrayerBox nextPrayer={prayerNames[prayerNameCounter]} name="Dhuhr" adhan_time={prayers['dhuhr']} iqamah_time={prayers['dhuhr_jamat']}/>
+        <PrayerBox nextPrayer={prayerNames[prayerNameCounter]} name="Asr" adhan_time={prayers['asr']} iqamah_time={prayers['asr_jamat']}/>
+        <PrayerBox nextPrayer={prayerNames[prayerNameCounter]} name="Magrib" adhan_time={prayers['magrib']} iqamah_time={prayers['magrib_jamat']}/>
+        <PrayerBox nextPrayer={prayerNames[prayerNameCounter]} name="Isha" adhan_time={prayers['isha']} iqamah_time={prayers['isha_jamat']}/>
       </div>
       <p className="footer">Times are based on London Central Mosque</p>
     </div> 
