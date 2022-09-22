@@ -123,6 +123,18 @@ h2 {
   border-radius: 10px;
 }
 
+.notif {
+  position:fixed;
+  background-color: var(--main-bg-color);
+  width: 100vw; 
+  height: 100vh; 
+  z-index: 1;
+  margin-left:50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .errorBar {
   position: absolute;
   width: 100%;

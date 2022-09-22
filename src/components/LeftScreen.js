@@ -3,7 +3,8 @@ import Notif from "./Notif";
 import PrayerBox from "./PrayerBox"
 
 const LeftScreen = ({ now, prayers}) => {
-  const [notif, setNotif] = useState(false)
+  const [adhanNotif, setAdhanNotif] = useState(false)
+  const [iqamahNotif, setIqamahNotif] = useState(false)
   //Used to get current time
   const time = now.toLocaleString("en-GB", { timeZone: "Europe/London" }).split(", ");
   //Hijri Calender Date  
@@ -20,7 +21,6 @@ const LeftScreen = ({ now, prayers}) => {
   let difference = (endDate.getTime() - startDate.getTime()) / 1000;
   //Ensures that we are counting down to the next prayer
   if (difference < 0) {
-    console.log(prayerNameCounter);
     if (prayerNameCounter === 9) {
       setPrayerNameCounter(0)
     }
@@ -28,10 +28,17 @@ const LeftScreen = ({ now, prayers}) => {
   }
   useEffect(() => {
     if (hourDifference === '00' && minuteDifference === '00'&& difference === '00') {
-      setNotif(true) 
-      setTimeout(() => {
-        setNotif(false)
-      }, 20000);
+        if (prayerNames[prayerNameCounter].slice(-5) === 'jamat') {
+          setIqamahNotif(true)
+          setTimeout(() => {
+            setIqamahNotif(false)
+          }, 20000);
+        } else {
+          setAdhanNotif(true) 
+          setTimeout(() => {
+            setAdhanNotif(false)
+          }, 20000);
+        }
     } 
   } , [start[2]])
   let hourDifference =  ( '0' + Math.floor(difference / 3600)).slice(-2);
@@ -41,7 +48,7 @@ const LeftScreen = ({ now, prayers}) => {
   difference = ('0' + difference).slice(-2)
   return (
     <div className="leftScreen">
-      <Notif boolean={notif} />
+      <Notif adhanBoolean={adhanNotif} iqamahBoolean={iqamahNotif} />
       <div className="curr_time_box"> 
         <div className="header">
           <div className="date">{ time[0] }</div>

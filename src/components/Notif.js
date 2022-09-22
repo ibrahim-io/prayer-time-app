@@ -1,20 +1,19 @@
 
-const Notif = ({boolean}) => {
-  if (boolean) {
-    console.log('we made it herererer');
+const Notif = ({adhanBoolean, iqamahBoolean}) => {
+  if (adhanBoolean) {
     return (
-      <div style={{
-        'position':'fixed',
-        'backgroundColor': 'black', 
-        'width': '100vw', 
-        'height': '100vh', 
-        'zIndex': '1',
-        'marginLeft':'50vw' 
-        }}>
-        <p style={{'color': 'red'}}>It is now time for prayer</p>
+      <div className="notif">
+        <p style={{'color': 'white', 'fontSize': '5em'}}>It is now time for the ADHAN</p>
       </div>
     )
   } 
+  if (iqamahBoolean) {
+    return (
+      <div className="notif">
+        <p style={{'color': 'white', 'fontSize': '5em'}}>It is now time for the IQAMAH</p>
+      </div>
+    )
+  }
 }
 
 export default Notif
