@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { useAsync } from "./hooks/useAsync";
 
 import LeftScreen from "./components/LeftScreen";
 import RightScreen from "./components/RightScreen";
 
 const App = () => {
+  // media query stuff
+  const matches = useMediaQuery("(max-width: 900px)")
   const [counter, setCounter] = useState(Math.floor(Math.random() * 1895));
   const [now, setNow] = useState(new Date());
   useEffect(() => {
@@ -54,12 +56,21 @@ const App = () => {
   }
 
   if (status === "success") {
-    return (
-      <div className="outerScreen">
-        <LeftScreen now={now} prayers={value[0][`${year}-${month}-${day}`] }/>
-        <RightScreen arabicHadith={value[2]} engHadith={value[1]} counter={counter} setCounter={setCounter}/>
-      </div>
-    );
+    if (!matches) {
+      return (
+        <div className="outerScreen">
+          <LeftScreen now={now} prayers={value[0][`${year}-${month}-${day}`] }/>
+          <RightScreen arabicHadith={value[2]} engHadith={value[1]} counter={counter} setCounter={setCounter}/>
+        </div>
+      );
+    } else {
+      return (
+        <div className="outerScreen">
+          <LeftScreen now={now} prayers={value[0][`${year}-${month}-${day}`] }/>
+        </div>
+      )
+    }
+    
   }
 
   return <div>Unknown State { status }</div>

@@ -52,10 +52,12 @@ const LeftScreen = ({ now, prayers}) => {
       <div className="curr_time_box"> 
         <div className="header">
           <div className="date">{ time[0] }</div>
-          <p className="title">Prayer Times - {time[1].match(/..:../)}</p>
+          <p className="title">{time[1].match(/..:../)}</p>
           <div className="date">{ hijri }</div>
-        </div>
-        <p>{prayerNames[prayerNameCounter].toUpperCase()} is in</p>
+        </div>  
+
+        <p style={{'marginTop': '3vh'}} className="title">Prayer Times</p>
+        <p >{prayerNames[prayerNameCounter].toUpperCase()} is in</p>
         <div className="countdown_timer">{hourDifference}:{minuteDifference}:{difference}</div>
         <div className="countdown_text">HOURS: MINS: SECS</div>
       </div>
