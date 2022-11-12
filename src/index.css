@@ -165,12 +165,17 @@ h2 {
     align-items: center;
   }
 
+  .prayer_box h4, p {
+    margin: 5px;
+  }
+
   .curr_time_box {
     width: 98vw;
-    height: 40vh;
+    height: 50vh;
   }
   .countdown_timer {
-    font-size: 5em;
+    font-size: 3em;
+    margin-top: .8em;
   }
 
 }

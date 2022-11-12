@@ -18,7 +18,22 @@ const LeftScreen = ({ now, prayers}) => {
   //I've put in a dummy date below because that doesnt matter to the calculations
   let endDate = new Date(2020, 5, 5, tiime[0] , tiime[1] , 0 );
   let startDate = new Date(2020,5,5, start[0], start[1], start[2])
-  let difference = (endDate.getTime() - startDate.getTime()) / 1000;
+  let difference = Math.abs(endDate.getTime() - startDate.getTime()) / 1000;
+  //Calculation for fajr (sorry for the mess :|)
+  if (prayerNameCounter == 0) {
+    difference = 0
+    //this checks if the time is past 12am
+    // if it is then we dont need the intemediary calculation
+    if (start[0][0] !== '0') {
+      let intermediary1 = new Date(2020,5,5, '24', '00', '00')
+      difference += Math.abs(intermediary1.getTime() - startDate.getTime()) / 1000;
+    }
+    let intermediary2 = new Date(2020,5,5, '00', '00', '00')
+    difference += Math.abs(endDate.getTime() - intermediary2.getTime() ) / 1000;
+    console.log(difference / 3600);
+  }
+
+  console.log(difference);
   //Ensures that we are counting down to the next prayer
   if (difference < 0) {
     if (prayerNameCounter === 9) {
