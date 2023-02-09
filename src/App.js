@@ -6,6 +6,7 @@ import LeftScreen from "./components/LeftScreen";
 import RightScreen from "./components/RightScreen";
 
 const App = () => {
+  console.log(process.env.REACT_APP_API_KEY);
   // media query stuff
   const matches = useMediaQuery("(max-width: 900px)")
   const [counter, setCounter] = useState(Math.floor(Math.random() * 1895));
@@ -31,14 +32,14 @@ const App = () => {
 
   const { execute, status, value, error } = useAsync(async () => {
     console.log("Requesting londonprayertimes");
-    const res1 = await fetch(`https://www.londonprayertimes.com/api/times/?format=json&key=${process.env.REACT_APP_API_KEY}&year=${year}&month=${month}&24hours=true`);
-    const res2 = await fetch('https://ahadith-api.herokuapp.com/api/ahadith/all/en')
-    const res3 = await fetch('https://ahadith-api.herokuapp.com/api/ahadith/all/ar-tashkeel')
-    if (res1.ok && res2.ok && res3.ok) {
+    const res1 = await fetch(`https://www.londonprayertimes.com/api/times/?format=json&key=9fa65efc-3a14-4636-af03-98a7b51c401f&year=${year}&month=${month}&24hours=true`);
+    // const res2 = await fetch('https://ahadith-api.herokuapp.com/api/ahadith/all/en')
+    // const res3 = await fetch('https://ahadith-api.herokuapp.com/api/ahadith/all/ar-tashkeel')
+    if (res1.ok /*&& res2.ok && res3.ok*/) {
       return [
         (await res1.json()).times, 
-        (await res2.json()).AllChapters, 
-        (await res3.json()).AllChapters
+        // (await res2.json()).AllChapters, 
+        // (await res3.json()).AllChapters
       ];
     }
     throw new Error(`Request returned with HTTP status code: ${res1.status}`);
@@ -60,7 +61,7 @@ const App = () => {
       return (
         <div className="outerScreen">
           <LeftScreen now={now} prayers={value[0][`${year}-${month}-${day}`] }/>
-          <RightScreen arabicHadith={value[2]} engHadith={value[1]} counter={counter} setCounter={setCounter}/>
+          <RightScreen />
         </div>
       );
     } else {

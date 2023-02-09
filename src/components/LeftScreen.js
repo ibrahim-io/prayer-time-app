@@ -30,10 +30,8 @@ const LeftScreen = ({ now, prayers}) => {
     }
     let intermediary2 = new Date(2020,5,5, '00', '00', '00')
     difference += Math.abs(endDate.getTime() - intermediary2.getTime() ) / 1000;
-    console.log(difference / 3600);
   }
 
-  console.log(difference);
   //Ensures that we are counting down to the next prayer
   if (difference < 0) {
     if (prayerNameCounter === 9) {
