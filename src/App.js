@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useAsync } from "./hooks/useAsync";
+import { useWakeLock } from 'react-screen-wake-lock';
 
 import LeftScreen from "./components/LeftScreen";
 import RightScreen from "./components/RightScreen";
 
 const App = () => {
+  const { isSupported, released, request, release } = useWakeLock({
+    onRequest: () => alert('Screen Wake Lock: requested!'),
+    onError: () => alert('An error happened 💥'),
+    onRelease: () => alert('Screen Wake Lock: released!'),
+  });
+
   console.log(process.env.REACT_APP_API_KEY);
   // media query stuff
   const matches = useMediaQuery("(max-width: 900px)")
@@ -18,7 +25,7 @@ const App = () => {
     const counterIntervalId = setInterval(() => {
       setCounter(Math.floor(Math.random() * 1895))
     }, 45000);
-      
+
     // cleanup function
     return () => {
       clearInterval(counterIntervalId)
@@ -37,7 +44,7 @@ const App = () => {
     // const res3 = await fetch('https://ahadith-api.herokuapp.com/api/ahadith/all/ar-tashkeel')
     if (res1.ok /*&& res2.ok && res3.ok*/) {
       return [
-        (await res1.json()).times, 
+        (await res1.json()).times,
         // (await res2.json()).AllChapters, 
         // (await res3.json()).AllChapters
       ];
@@ -47,9 +54,9 @@ const App = () => {
   useEffect(() => {
     execute();
   }, [month]);
-  
+
   if (status === "error") {
-    return <div className="errorBar">{ error.message }</div>;
+    return <div className="errorBar">{error.message}</div>;
   }
 
   if (status === "pending") {
@@ -60,21 +67,21 @@ const App = () => {
     if (!matches) {
       return (
         <div className="outerScreen">
-          <LeftScreen now={now} prayers={value[0][`${year}-${month}-${day}`] }/>
+          <LeftScreen now={now} prayers={value[0][`${year}-${month}-${day}`]} />
           <RightScreen />
         </div>
       );
     } else {
       return (
         <div className="outerScreen">
-          <LeftScreen now={now} prayers={value[0][`${year}-${month}-${day}`] }/>
+          <LeftScreen now={now} prayers={value[0][`${year}-${month}-${day}`]} />
         </div>
       )
     }
-    
+
   }
 
-  return <div>Unknown State { status }</div>
+  return <div>Unknown State {status}</div>
 };
 
 export default App;

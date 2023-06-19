@@ -77,7 +77,7 @@ const LeftScreen = ({ now, prayers }) => {
       <div className="prayer_container">
         <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
           <h3>Fajr, Weekends and Holidays:&nbsp;&nbsp;</h3>
-          <p>Usually there are less students around at these time so it is not guaranteed you will find a jamat</p>
+          <p>Usually there are less students around at these time so it's not guaranteed you will find a jamat</p>
         </div>
         <PrayerBox nextPrayer={prayerNames[prayerNameCounter]} name="Dhuhr" adhan_time={prayers['dhuhr']} iqamah_time={prayers['dhuhr_jamat']} />
         <PrayerBox nextPrayer={prayerNames[prayerNameCounter]} name="Asr" adhan_time={prayers['asr']} iqamah_time={prayers['asr_jamat']} />
